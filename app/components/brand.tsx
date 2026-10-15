@@ -1,0 +1,30 @@
+const SIZES = {
+  sm: { icon: 20, text: 'text-sm' },
+  md: { icon: 24, text: 'text-lg' },
+  lg: { icon: 34, text: 'text-2xl' },
+} as const;
+
+export function Brand({ size = 'md' }: { size?: keyof typeof SIZES }) {
+  const { icon, text } = SIZES[size];
+
+  return (
+    <span className="inline-flex items-center gap-2">
+      <svg width={icon} height={icon} viewBox="0 0 24 24" fill="none" className="flex-none">
+        <rect x="1" y="1" width="22" height="22" rx="7" fill="var(--accent)" opacity="0.12" />
+        <path
+          d="M7.5 12.6l2.8 2.8L16.6 9"
+          stroke="var(--accent)"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+      <span className={`${text} font-semibold tracking-tight`} style={{ color: 'var(--accent)' }}>
+        Cease to Resume
+      </span>
+      <span className="chip" style={{ padding: '0.1rem 0.55rem', fontSize: '0.65rem', fontWeight: 650, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+        Admin
+      </span>
+    </span>
+  );
+}
