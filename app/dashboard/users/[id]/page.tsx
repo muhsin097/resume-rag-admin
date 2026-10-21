@@ -16,7 +16,7 @@ interface ExperienceItem {
 interface ResumeGeneration {
   id: string;
   jobDescription: string;
-  matchScore: number;
+  fitScore: number;
   createdAt: string;
 }
 
@@ -120,9 +120,9 @@ export default async function UserDetailPage({
         {user.resumeGenerations.map((gen) => (
           <div key={gen.id} className="flex items-center gap-3">
             <span
-              className={`flex h-8 w-8 flex-none items-center justify-center rounded-full text-xs font-semibold ${scoreColorClass(gen.matchScore)}`}
+              className={`flex h-8 w-8 flex-none items-center justify-center rounded-full text-xs font-semibold ${scoreColorClass(gen.fitScore)}`}
             >
-              {gen.matchScore}
+              {gen.fitScore}
             </span>
             <span className="text-sm">
               {new Date(gen.createdAt).toLocaleString()} ·{' '}

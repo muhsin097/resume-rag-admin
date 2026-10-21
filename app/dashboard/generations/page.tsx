@@ -7,7 +7,7 @@ export const instant = false;
 interface GenerationRow {
   id: string;
   jobDescription: string;
-  matchScore: number;
+  fitScore: number;
   createdAt: string;
   user: { id: string; name: string; email: string };
 }
@@ -60,9 +60,9 @@ export default async function GenerationsPage({
         {generations.map((gen) => (
           <div key={gen.id} className="card flex items-center gap-3">
             <span
-              className={`flex h-9 w-9 flex-none items-center justify-center rounded-full text-sm font-semibold ${scoreColorClass(gen.matchScore)}`}
+              className={`flex h-9 w-9 flex-none items-center justify-center rounded-full text-sm font-semibold ${scoreColorClass(gen.fitScore)}`}
             >
-              {gen.matchScore}
+              {gen.fitScore}
             </span>
             <div className="min-w-0 flex-1">
               <p className="text-sm">

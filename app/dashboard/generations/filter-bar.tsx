@@ -41,7 +41,7 @@ export function FilterBar({
           onChange={() => formRef.current?.requestSubmit()}
         >
           <option value="createdAt">Created date</option>
-          <option value="matchScore">Match score</option>
+          <option value="fitScore">Fit score</option>
         </select>
       </label>
 
