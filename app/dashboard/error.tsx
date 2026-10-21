@@ -14,7 +14,7 @@ export default function DashboardError({
   }, [error]);
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8 text-center">
+    <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 p-8 text-center">
       <h1 className="text-xl font-semibold">Something went wrong</h1>
       <p className="max-w-sm text-sm muted">
         Please try again. If this keeps happening, check the server logs.
