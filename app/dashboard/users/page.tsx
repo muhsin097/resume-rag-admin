@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { apiFetch } from '@/lib/api';
+import { apiFetchJson } from '@/lib/api';
 
 export const instant = false;
 
@@ -36,8 +36,7 @@ export default async function UsersPage({
   const sortBy = typeof params.sortBy === 'string' ? params.sortBy : 'createdAt';
   const order = typeof params.order === 'string' ? params.order : 'desc';
 
-  const res = await apiFetch(`/admin/users?sortBy=${sortBy}&order=${order}`);
-  const users: AdminUser[] = await res.json();
+  const users = await apiFetchJson<AdminUser[]>(`/admin/users?sortBy=${sortBy}&order=${order}`);
   const current = { sortBy, order };
 
   return (

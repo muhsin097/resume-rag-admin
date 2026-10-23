@@ -1,4 +1,4 @@
-import { apiFetch } from '@/lib/api';
+import { apiFetchJson } from '@/lib/api';
 import { TYPE_BADGE_CLASSES } from './type-colors';
 
 export const instant = false;
@@ -30,8 +30,7 @@ function buildTrend(byDay: { date: string; count: number }[]) {
 }
 
 export default async function OverviewPage() {
-  const res = await apiFetch('/admin/overview');
-  const overview: Overview = await res.json();
+  const overview = await apiFetchJson<Overview>('/admin/overview');
 
   const typeTotal = overview.itemsByType.reduce((sum, row) => sum + row.count, 0) || 1;
   const maxSkillCount = Math.max(1, ...overview.topSkills.map((s) => s.count));

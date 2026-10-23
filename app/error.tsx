@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
+import Link from 'next/link';
+import { isSessionExpired } from '@/lib/api';
 
 // Root-level fallback -- app/dashboard/error.tsx handles the main
 // authenticated area more specifically; this just makes sure nothing in
@@ -16,6 +18,20 @@ export default function RootError({
   useEffect(() => {
     console.error('[error-boundary:root]', error);
   }, [error]);
+
+  if (isSessionExpired(error)) {
+    return (
+      <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 p-8 text-center">
+        <h1 className="text-xl font-semibold">Your session has expired</h1>
+        <p className="max-w-sm text-sm muted">
+          Admin sessions are only valid for 7 days. Log in again to continue.
+        </p>
+        <Link href="/login" className="btn-primary">
+          Log in again
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 p-8 text-center">

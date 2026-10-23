@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { apiFetch } from '@/lib/api';
+import { apiFetchJson } from '@/lib/api';
 import { TYPE_BADGE_CLASSES } from '../../type-colors';
 
 export const instant = false;
@@ -57,8 +57,7 @@ export default async function UserDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const res = await apiFetch(`/admin/users/${id}`);
-  const user: UserDetail = await res.json();
+  const user = await apiFetchJson<UserDetail>(`/admin/users/${id}`);
 
   const grouped = new Map<string, ExperienceItem[]>();
   for (const item of user.experienceItems) {

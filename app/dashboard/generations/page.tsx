@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { apiFetch } from '@/lib/api';
+import { apiFetchJson } from '@/lib/api';
 import { FilterBar } from './filter-bar';
 
 export const instant = false;
@@ -43,12 +43,10 @@ export default async function GenerationsPage({
   query.set('sortBy', sortBy);
   query.set('order', order);
 
-  const [generationsRes, usersRes] = await Promise.all([
-    apiFetch(`/admin/resume-generations?${query.toString()}`),
-    apiFetch('/admin/users'),
+  const [generations, users] = await Promise.all([
+    apiFetchJson<GenerationRow[]>(`/admin/resume-generations?${query.toString()}`),
+    apiFetchJson<AdminUser[]>('/admin/users'),
   ]);
-  const generations: GenerationRow[] = await generationsRes.json();
-  const users: AdminUser[] = await usersRes.json();
 
   return (
     <div className="mx-auto max-w-5xl space-y-4">

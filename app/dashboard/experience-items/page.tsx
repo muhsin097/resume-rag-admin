@@ -1,4 +1,4 @@
-import { apiFetch } from '@/lib/api';
+import { apiFetchJson } from '@/lib/api';
 import { TYPE_BADGE_CLASSES } from '../type-colors';
 import { FilterBar } from './filter-bar';
 
@@ -39,12 +39,10 @@ export default async function ExperienceItemsPage({
   query.set('sortBy', sortBy);
   query.set('order', order);
 
-  const [itemsRes, usersRes] = await Promise.all([
-    apiFetch(`/admin/experience-items?${query.toString()}`),
-    apiFetch('/admin/users'),
+  const [items, users] = await Promise.all([
+    apiFetchJson<ExperienceItemRow[]>(`/admin/experience-items?${query.toString()}`),
+    apiFetchJson<AdminUser[]>('/admin/users'),
   ]);
-  const items: ExperienceItemRow[] = await itemsRes.json();
-  const users: AdminUser[] = await usersRes.json();
 
   return (
     <div className="mx-auto max-w-5xl space-y-4">
